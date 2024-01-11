@@ -1,11 +1,18 @@
 import heapq
 from collections import defaultdict
 import lz4.frame
+import random
+
+# Set a seed for reproducibility
+random.seed(42)  # You can use any integer as the seed
 
 def bwt(text):
-    rotations = [text[i:] + text[:i] for i in range(len(text))]
-    sorted_rotations = sorted(rotations)
-    bwt_result = ''.join(rotation[-1] for rotation in sorted_rotations)
+    # Generate rotations and sort them using a stable sorting algorithm
+    rotations = sorted([(text[i:] + text[:i], i) for i in range(len(text))], key=lambda x: x[0])
+    
+    # Extract the last characters of sorted rotations
+    bwt_result = ''.join(rotation[(index - 1) % len(text)] for rotation, index in rotations)
+    
     return bwt_result
 
 def mtf_encode(text):
