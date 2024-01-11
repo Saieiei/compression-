@@ -39,3 +39,4 @@ print("\nMetrics:")
 print("Original Size (bits):", original_size)
 print("Compression Size (bits):", compressed_size)
 print("Compression Factor:", compression_factor)
+#hi
